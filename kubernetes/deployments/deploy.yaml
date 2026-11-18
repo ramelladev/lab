@@ -15,11 +15,7 @@ spec:
         app: test
     spec:
       containers:
-<<<<<<< HEAD
       - image: httpd:alpine3.24
-=======
-      - image: httpd:alpine3.19
->>>>>>> 52201a394d83a0d37529f1de8430e8e526e9a415
         name: httpd
         command: ["/bin/bash", "-c"] # override the default command
         args: ["sleep 30; exit 1"] # sleep for 30 seconds then exit with an error
