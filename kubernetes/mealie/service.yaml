@@ -5,6 +5,8 @@ metadata:
     app: mealie
   name: mealie
   namespace: mealie
+  annotations:
+      metallb.universe.tf/address-pool: vlan160-pool
 spec:
   ports:
   - port: 9000
