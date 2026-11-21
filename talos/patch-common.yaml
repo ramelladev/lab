@@ -8,3 +8,11 @@ taints:
 labels:
   node.kubernetes.io/exclude-from-external-load-balancers:
     $patch: delete
+nodeIP:
+  validSubnets:
+    - 10.128.8.128/27
+---
+cluster:
+  etcd:
+    advertisedSubnets:
+      - 10.128.8.128/27

@@ -24,5 +24,3 @@ parent: enp3s0
 up: true
 addresses:
     - address: 10.128.8.162/27
-routes:
-  - gateway: 10.128.8.190
