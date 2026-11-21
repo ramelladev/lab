@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: kube-prometheus-stack-grafana
-  name: kube-prometheus-stack-grafana
+    app: grafana
+  name: grafana-loadbalancer
   namespace: monitoring
   annotations:
       metallb.universe.tf/address-pool: dmz-pool
@@ -13,5 +13,6 @@ spec:
     protocol: TCP
     targetPort: 3000
   selector:
-    app: kube-prometheus-stack-grafana
+    app.kubernetes.io/instance: prometheus-stack
+    app.kubernetes.io/name: grafana
   type: LoadBalancer
