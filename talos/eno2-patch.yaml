@@ -1,0 +1,28 @@
+apiVersion: v1alpha1
+kind: UnattendedInstallConfig
+installer:
+  image: factory.talos.dev/metal-installer-secureboot/64db64cbf771f2729e69f886652f7efcff1fcb9431ce4199f0d1d7088a60904d:v1.14.6
+provisioning:
+  diskSelector:
+    match: disk.wwid == "eui.0025388491b8da74"
+---
+apiVersion: v1alpha1
+kind: DHCPv4Config
+name: eno2
+---
+apiVersion: v1alpha1
+kind: Layer2VIPConfig
+name: 10.128.8.129
+link: eno2
+---
+apiVersion: v1alpha1
+kind: VLANConfig
+name: eno2.160
+vlanID: 160
+vlanMode: 802.1q
+parent: eno2
+up: true
+addresses:
+    - address: 10.128.8.163/27
+routes:
+  - gateway: 10.128.8.190

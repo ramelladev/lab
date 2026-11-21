@@ -1,0 +1,56 @@
+Schematic ID: a0f96ec9c10fdd160112ebecf4695d8526ebef6a62fb55b1d83c8623c9bc2c91
+Used by: cp1 (10.128.8.130), cp2 (10.128.8.131) - AMD
+Yellow flash drive still has the old 376b1f... image (with libvirtd + zfs); only the installer image below matters for installs
+factory.talos.dev/metal-installer-secureboot/a0f96ec9c10fdd160112ebecf4695d8526ebef6a62fb55b1d83c8623c9bc2c91:v1.14.6
+
+customization:
+    systemExtensions:
+        officialExtensions:
+            - siderolabs/amd-npu
+            - siderolabs/amd-ucode
+            - siderolabs/amdgpu
+            - siderolabs/btrfs
+            - siderolabs/iscsi-tools
+            - siderolabs/nfs-utils
+            - siderolabs/nvme-cli
+    bootloader: sd-boot
+
+First Boot
+Here are the options for the initial boot of Talos Linux on a bare-metal machine or a generic virtual machine:
+
+SecureBoot ISO
+https://factory.talos.dev/image/a0f96ec9c10fdd160112ebecf4695d8526ebef6a62fb55b1d83c8623c9bc2c91/v1.14.6/metal-amd64-secureboot.iso(checksums)(signature)(SecureBoot documentation)
+SecureBoot Disk Image
+https://factory.talos.dev/image/a0f96ec9c10fdd160112ebecf4695d8526ebef6a62fb55b1d83c8623c9bc2c91/v1.14.6/metal-amd64-secureboot.raw.zst(checksums)(signature)(SecureBoot documentation)
+
+Schematic ID: 64db64cbf771f2729e69f886652f7efcff1fcb9431ce4199f0d1d7088a60904d
+Used by: cp3 (10.128.8.132) - Intel
+Blue flash drive still has the old 73ee4a... image (with libvirtd); only the installer image below matters for installs
+factory.talos.dev/metal-installer-secureboot/64db64cbf771f2729e69f886652f7efcff1fcb9431ce4199f0d1d7088a60904d:v1.14.6
+
+customization:
+    systemExtensions:
+        officialExtensions:
+            - siderolabs/intel-hd-audio
+            - siderolabs/intel-ice-firmware
+            - siderolabs/intel-npu
+            - siderolabs/intel-ucode
+            - siderolabs/iscsi-tools
+            - siderolabs/nfs-utils
+            - siderolabs/nfsd
+            - siderolabs/nvme-cli
+    bootloader: sd-boot
+
+First Boot
+Here are the options for the initial boot of Talos Linux on a bare-metal machine or a generic virtual machine:
+
+SecureBoot ISO
+https://factory.talos.dev/image/64db64cbf771f2729e69f886652f7efcff1fcb9431ce4199f0d1d7088a60904d/v1.14.6/metal-amd64-secureboot.iso(checksums)(signature)(SecureBoot documentation)
+SecureBoot Disk Image
+https://factory.talos.dev/image/64db64cbf771f2729e69f886652f7efcff1fcb9431ce4199f0d1d7088a60904d/v1.14.6/metal-amd64-secureboot.raw.zst(checksums)(signature)(SecureBoot documentation)
+
+History
+2026-11-19: Removed siderolabs/libvirtd (both) and siderolabs/zfs (AMD). Their services never start without extra
+config (libvirtd waits on /etc/passwd, zfs on /dev/zfs since the module isn't loaded), which blocks the boot sequence
+and Talos reboots the node after its ~70 min boot timeout. KubeVirt doesn't need host libvirtd. If an extension is
+ever added back, confirm `talosctl get machinestatus` shows stage "running" afterwards.

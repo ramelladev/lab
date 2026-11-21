@@ -1,0 +1,10 @@
+# Applied to every control-plane node, alongside its patch-cpN.yaml:
+#   talosctl gen config ... --config-patch-control-plane @patch-common.yaml --config-patch-control-plane @patch-cpN.yaml
+# Removes the control-plane NoSchedule taint so workloads run on all nodes.
+apiVersion: v1alpha1
+kind: KubeNodeConfig
+taints:
+  $patch: delete
+labels:
+  node.kubernetes.io/exclude-from-external-load-balancers:
+    $patch: delete
