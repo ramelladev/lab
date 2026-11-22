@@ -4,7 +4,6 @@ metadata:
   labels:
     app: linkding
   name: linkding
-  namespace: linkding
 spec:
   replicas: 1
   selector:
@@ -21,9 +20,9 @@ spec:
         ports:
           - containerPort: 9090
         volumeMounts:
-          - mountPath: /etc/linkding/data
-            name: linkding-data-pvc
-    volumes:
-      - name: linkding-data-pvc
-        persistentVolumeClaim:
-          claimName: linkding-data-pvc
+          - name: linkding-data
+            mountPath: /etc/linkding/data
+      volumes:
+        - name: linkding-data
+          persistentVolumeClaim:
+            claimName: linkding-data-pvc
