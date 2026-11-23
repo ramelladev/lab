@@ -31,6 +31,6 @@ spec:
       adminPassword: mischa
       ingress:
         enabled: true
-      hosts:
-        - grafana.ramella.dev
+        hosts:
+          - grafana.ramella.dev
 
