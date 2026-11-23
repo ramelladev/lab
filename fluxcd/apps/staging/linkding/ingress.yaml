@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: linkding.local.ramella.dev
+    - host: linkding.local
       http:
         paths:
           - backend:
