@@ -29,4 +29,8 @@ spec:
   values:
     grafana:
       adminPassword: mischa
+      ingress:
+        enabled: true
+      hosts:
+        - grafana.ramella.dev
 
