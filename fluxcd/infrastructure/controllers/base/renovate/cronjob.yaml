@@ -14,7 +14,7 @@ spec:
             - name: renovate
               image: renovate/renovate:latest
               args:
-                - ramelladev/lab.git
+                - ramelladev/lab
 
               envFrom:
                 - secretRef:
