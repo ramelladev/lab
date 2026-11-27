@@ -37,7 +37,12 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 10
 
+        volumeMounts:
+        - name: config
+          mountPath: /etc/cloudflared/config
+          readOnly: true
       # Create a config.yaml file from the ConfigMap below.
+    volumes:
       - name: config
         configMap:
           name: cloudflared
