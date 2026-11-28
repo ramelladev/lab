@@ -15,18 +15,28 @@ spec:
       containers:
       - name: cloudflared
         image: cloudflare/cloudflared:latest
-        envFrom:
-          - secretRef:
-              name: cloudflare-credentials
-        args:
-        - tunnel
-
-        # Points cloudflared to the config file, which configures what
-        # cloudflared will actually do. This file is created by a ConfigMap
-        # below.
-        - --config
-        - /etc/cloudflared/config/config.yaml
-        - run
+        env:
+          # Defines an environment variable for the tunnel token.
+          - name: TUNNEL_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: tunnel-token
+                key: token
+        command:
+          # Configures tunnel run parameters
+          - cloudflared
+          - tunnel
+          - --loglevel
+          - info
+          - --output
+          - json
+          - run
+          # Points cloudflared to the config file, which configures what
+          # cloudflared will actually do. This file is created by a ConfigMap
+          # below.
+          - --config
+          - /etc/cloudflared/config/config.yaml
+          - run
         livenessProbe:
           httpGet:
             # Cloudflared has a /ready endpoint which returns 200 if and only if
